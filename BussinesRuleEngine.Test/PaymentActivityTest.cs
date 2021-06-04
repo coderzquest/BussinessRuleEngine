@@ -12,8 +12,8 @@ namespace BussinesRuleEngine.Test
         public void Payment_ForAnyProduct_True()
         {
             Product product = new PhysicalProduct(1234, "Test Product", 100.50M);
-            PaymentActivity master = new PaymentActivity(product);
-            Assert.True(master.Pay());
+            PaymentActivity activity = new PaymentActivity(product);
+            Assert.True(activity.Execute());
         }
         [Fact]
         public void Payment_ForPhysicalProduct_GeneratePackagingSlip()
@@ -23,11 +23,10 @@ namespace BussinesRuleEngine.Test
             Mock<IGeneratePackingSlip> slipGeneratorRule = new Mock<IGeneratePackingSlip>();
             Mock<IGenerateCommission> generateCommissionRule = new Mock<IGenerateCommission>();
 
-            product.Rules.Add(slipGeneratorRule.Object);
-            product.Rules.Add(generateCommissionRule.Object);
-
-            PaymentActivity master = new PaymentActivity(product);
-            master.Pay();
+            PaymentActivity activity = new PaymentActivity(product);
+            activity.Rules.Add(slipGeneratorRule.Object);
+            activity.Rules.Add(generateCommissionRule.Object);
+            activity.Execute();
 
             slipGeneratorRule.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Once);
             generateCommissionRule.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Once);
@@ -39,13 +38,13 @@ namespace BussinesRuleEngine.Test
             Mock<IGeneratePackingSlip> slipGeneratorRule = new Mock<IGeneratePackingSlip>();
             Mock<IGenerateCommission> generateCommissionRule = new Mock<IGenerateCommission>();
 
-            product.Rules.Add(slipGeneratorRule.Object);
-            product.Rules.Add(slipGeneratorRule.Object);
-            product.Rules.Add(generateCommissionRule.Object);
+            
+            PaymentActivity activity = new PaymentActivity(product);
+            activity.Rules.Add(slipGeneratorRule.Object);
+            activity.Rules.Add(slipGeneratorRule.Object);
+            activity.Rules.Add(generateCommissionRule.Object);
 
-            PaymentActivity master = new PaymentActivity(product);
-
-            master.Pay();
+            activity.Execute();
 
             slipGeneratorRule.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Exactly(2));
             generateCommissionRule.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Once);
@@ -58,11 +57,10 @@ namespace BussinesRuleEngine.Test
             Mock<ISendEmail> sendMailRule = new Mock<ISendEmail>();
             Mock<IActivateMembership> activateMemberShipRule = new Mock<IActivateMembership>();
 
-            product.Rules.Add(sendMailRule.Object);
-            product.Rules.Add(activateMemberShipRule.Object);
-
-            PaymentActivity master = new PaymentActivity(product);
-            master.Pay();
+            PaymentActivity activity = new PaymentActivity(product);
+            activity.Rules.Add(sendMailRule.Object);
+            activity.Rules.Add(activateMemberShipRule.Object);
+            activity.Execute();
 
             sendMailRule.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Once);
             activateMemberShipRule.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Once);
@@ -75,11 +73,11 @@ namespace BussinesRuleEngine.Test
             Mock<ISendEmail> sendMailRule = new Mock<ISendEmail>();
             Mock<IUpgradeMembership> upgradeMembershipRule = new Mock<IUpgradeMembership>();
 
-            product.Rules.Add(sendMailRule.Object);
-            product.Rules.Add(upgradeMembershipRule.Object);
-
-            PaymentActivity master = new PaymentActivity(product);
-            master.Pay();
+           
+            PaymentActivity activity = new PaymentActivity(product);
+            activity.Rules.Add(sendMailRule.Object);
+            activity.Rules.Add(upgradeMembershipRule.Object);
+            activity.Execute();
 
             sendMailRule.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Once);
             upgradeMembershipRule.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Once);
@@ -91,10 +89,9 @@ namespace BussinesRuleEngine.Test
 
             Mock<IVideoPackingSlip> videoPackingSlip = new Mock<IVideoPackingSlip>();
 
-            product.Rules.Add(videoPackingSlip.Object);
-
-            PaymentActivity master = new PaymentActivity(product);
-            master.Pay();
+            PaymentActivity activity = new PaymentActivity(product);
+            activity.Rules.Add(videoPackingSlip.Object);
+            activity.Execute();
 
             videoPackingSlip.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Once);
         }

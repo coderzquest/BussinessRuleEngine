@@ -10,9 +10,8 @@ namespace BussinesRuleEngine.Products
         public long Id { get;  }
         public string Description { get; }
         public decimal Amount { get; }
-        public List<IBussinessRule> Rules { get; }
+        
         public Product(long id, string description, decimal amount) {
-            Rules = new List<IBussinessRule>();
             Id = id;
             Description = description;
             Amount = amount;
