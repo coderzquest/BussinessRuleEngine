@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1401
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BussinesRuleEngine", "BussinesRuleEngine\BussinesRuleEngine.csproj", "{7B49DCC2-277A-4C6A-ABB2-BF1CF46DE1B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BussinesRuleEngine.Test", "BussinesRuleEngine.Test\BussinesRuleEngine.Test.csproj", "{31E8A045-17EA-4949-83C0-7A39CA6E0A78}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B49DCC2-277A-4C6A-ABB2-BF1CF46DE1B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B49DCC2-277A-4C6A-ABB2-BF1CF46DE1B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B49DCC2-277A-4C6A-ABB2-BF1CF46DE1B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B49DCC2-277A-4C6A-ABB2-BF1CF46DE1B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31E8A045-17EA-4949-83C0-7A39CA6E0A78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31E8A045-17EA-4949-83C0-7A39CA6E0A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31E8A045-17EA-4949-83C0-7A39CA6E0A78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31E8A045-17EA-4949-83C0-7A39CA6E0A78}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {595AE967-0D4A-4606-83D6-2733FA97A142}
+	EndGlobalSection
+EndGlobal
