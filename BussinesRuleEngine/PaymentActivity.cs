@@ -16,7 +16,9 @@ namespace BussinesRuleEngine
             var isPaymentSuccesFull=ProcessPayment();
             if(!isPaymentSuccesFull)
                 return false;
-
+            if (_product.Rules != null)
+                foreach (var rule in _product.Rules)
+                    rule.Exceute();
             return true;
         }
         private bool ProcessPayment() {
