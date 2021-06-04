@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BussinesRuleEngine.Rules
 {
-    public class GeneratePackingSlip : IBussinessRule
+    public class GeneratePackingSlip : IGeneratePackingSlip
     {
         private readonly Product product;
         private readonly ISlipGenerator generator;
@@ -14,14 +14,13 @@ namespace BussinesRuleEngine.Rules
         {
             this.product = product;
             this.generator = generator;
-            product.Rules.Add(this);
         }
         public void Exceute()
         {
-            generator.Generate(product);
+            generator?.Generate(product);
         }
     }
-
+    public interface IGeneratePackingSlip : IBussinessRule { }
     public interface ISlipGenerator
     {
         void Generate(Product product);
