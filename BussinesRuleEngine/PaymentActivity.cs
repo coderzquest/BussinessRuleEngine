@@ -18,7 +18,7 @@ namespace BussinesRuleEngine
                 return false;
             if (_product.Rules != null)
                 foreach (var rule in _product.Rules)
-                    rule.Exceute();
+                    rule.Exceute(_product);
             return true;
         }
         private bool ProcessPayment() {

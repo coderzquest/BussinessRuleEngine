@@ -1,4 +1,5 @@
 ﻿using BussinesRuleEngine.Products;
+using BussinesRuleEngine.Rules;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,15 +8,11 @@ namespace BussinesRuleEngine.Rules
 {
     public class GenerateCommission : IGenerateCommission
     {
-        private readonly Product product;
-
-        public GenerateCommission(Product product) {
-            this.product = product;
-        }
-        public void Exceute()
+        public void Exceute(Product product)
         {
             //GenerateCommision
         }
     }
+
     public interface IGenerateCommission : IBussinessRule { }
 }

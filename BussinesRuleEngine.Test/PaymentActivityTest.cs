@@ -29,8 +29,8 @@ namespace BussinesRuleEngine.Test
             PaymentActivity master = new PaymentActivity(product);
             master.Pay();
 
-            slipGeneratorRule.Verify(t => t.Exceute(), Times.Once);
-            generateCommissionRule.Verify(t => t.Exceute(), Times.Once);
+            slipGeneratorRule.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Once);
+            generateCommissionRule.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Once);
         }
         [Fact]
         public void Payment_ForBook_GeneratePackagingSlipTwice()
@@ -47,8 +47,8 @@ namespace BussinesRuleEngine.Test
 
             master.Pay();
 
-            slipGeneratorRule.Verify(t => t.Exceute(), Times.Exactly(2));
-            generateCommissionRule.Verify(t => t.Exceute(), Times.Once);
+            slipGeneratorRule.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Exactly(2));
+            generateCommissionRule.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Once);
         }
         [Fact]
         public void Payment_ForActivateMemberShip_ActivateAndSendEmail()
@@ -64,8 +64,8 @@ namespace BussinesRuleEngine.Test
             PaymentActivity master = new PaymentActivity(product);
             master.Pay();
 
-            sendMailRule.Verify(t => t.Exceute(), Times.Once);
-            activateMemberShipRule.Verify(t => t.Exceute(), Times.Once);
+            sendMailRule.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Once);
+            activateMemberShipRule.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Once);
         }
         [Fact]
         public void Payment_ForUpgradeMemberShip_UpgradeAndSendEmail()
@@ -81,8 +81,22 @@ namespace BussinesRuleEngine.Test
             PaymentActivity master = new PaymentActivity(product);
             master.Pay();
 
-            sendMailRule.Verify(t => t.Exceute(), Times.Once);
-            upgradeMembershipRule.Verify(t => t.Exceute(), Times.Once);
+            sendMailRule.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Once);
+            upgradeMembershipRule.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Once);
+        }
+        [Fact]
+        public void Payment_ForAnyVideo_GenerateVideoSlip()
+        {
+            Product product = new Video(1234, "Terminator", 1678);
+
+            Mock<IVideoPackingSlip> videoPackingSlip = new Mock<IVideoPackingSlip>();
+
+            product.Rules.Add(videoPackingSlip.Object);
+
+            PaymentActivity master = new PaymentActivity(product);
+            master.Pay();
+
+            videoPackingSlip.Verify(t => t.Exceute(It.IsAny<Product>()), Times.Once);
         }
     }
 }

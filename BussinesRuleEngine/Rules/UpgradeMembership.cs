@@ -7,13 +7,8 @@ namespace BussinesRuleEngine.Rules
 {
     public class UpgradeMembership : IUpgradeMembership
     {
-        private readonly Product product;
-
-        public UpgradeMembership(Product product)
-        {
-            this.product = product;
-        }
-        public void Exceute()
+        
+        public void Exceute(Product product)
         {
             //upgrade membership
         }

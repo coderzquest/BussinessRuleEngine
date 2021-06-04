@@ -7,15 +7,13 @@ namespace BussinesRuleEngine.Rules
 {
     public class GeneratePackingSlip : IGeneratePackingSlip
     {
-        private readonly Product product;
         private readonly ISlipGenerator generator;
 
-        public GeneratePackingSlip(Product product, ISlipGenerator generator)
+        public GeneratePackingSlip(ISlipGenerator generator)
         {
-            this.product = product;
             this.generator = generator;
         }
-        public void Exceute()
+        public void Exceute(Product product)
         {
             generator?.Generate(product);
         }
